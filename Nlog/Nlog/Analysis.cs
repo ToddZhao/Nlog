@@ -53,9 +53,10 @@ namespace Nlog
         private void btnLoadCheckChange_Click(object sender, EventArgs e)
         {
             DataTable dt = dgNLog.DataSource as DataTable;
-            foreach (var item in dt.Rows)
+            var list = dt.DataTableToList();
+            foreach (var item in list)
             {
-                
+
             }
         }
     }

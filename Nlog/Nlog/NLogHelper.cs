@@ -1,5 +1,8 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Nlog
 {
@@ -51,5 +54,10 @@ namespace Nlog
             }
             set { LogTable = value; }
         }
+
+        
     }
+
+
+   
 }

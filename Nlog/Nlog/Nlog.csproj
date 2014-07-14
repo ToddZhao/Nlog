@@ -59,6 +59,7 @@
     <Compile Include="Analysis.Designer.cs">
       <DependentUpon>Analysis.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Classes.cs" />
     <Compile Include="ExportHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -72,6 +73,7 @@
     <Compile Include="Nlog.Designer.cs">
       <DependentUpon>Nlog.cs</DependentUpon>
     </Compile>
+    <Compile Include="NLogExtends.cs" />
     <Compile Include="NLogHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,6 +144,7 @@
       <Name>NlogData</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
