@@ -34,5 +34,22 @@ namespace Nlog
                 return table;
             }
         }
+
+        public static string ConnString
+        {
+            get
+            {
+                return ConfigurationManager.ConnectionStrings["NLogDB"].ToString();
+            }
+        }
+
+        public static string LogTable
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["LogTable"];
+            }
+            set { LogTable = value; }
+        }
     }
 }

@@ -39,6 +39,9 @@
             this.btnExportView = new System.Windows.Forms.Button();
             this.lbController = new System.Windows.Forms.ListBox();
             this.lbItemText = new System.Windows.Forms.ListBox();
+            this.btnExportToDB = new System.Windows.Forms.Button();
+            this.btnExportAllToDB = new System.Windows.Forms.Button();
+            this.lbLogTable = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,9 +73,9 @@
             // 
             // btnStuff
             // 
-            this.btnStuff.Location = new System.Drawing.Point(520, 38);
+            this.btnStuff.Location = new System.Drawing.Point(520, 12);
             this.btnStuff.Name = "btnStuff";
-            this.btnStuff.Size = new System.Drawing.Size(75, 23);
+            this.btnStuff.Size = new System.Drawing.Size(121, 23);
             this.btnStuff.TabIndex = 5;
             this.btnStuff.Text = "Stuff";
             this.btnStuff.UseVisualStyleBackColor = true;
@@ -132,7 +135,7 @@
             this.lbController.Location = new System.Drawing.Point(131, 38);
             this.lbController.Name = "lbController";
             this.lbController.ScrollAlwaysVisible = true;
-            this.lbController.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbController.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbController.Size = new System.Drawing.Size(383, 244);
             this.lbController.Sorted = true;
             this.lbController.TabIndex = 15;
@@ -144,16 +147,51 @@
             this.lbItemText.Location = new System.Drawing.Point(132, 309);
             this.lbItemText.Name = "lbItemText";
             this.lbItemText.ScrollAlwaysVisible = true;
-            this.lbItemText.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lbItemText.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbItemText.Size = new System.Drawing.Size(382, 256);
             this.lbItemText.Sorted = true;
             this.lbItemText.TabIndex = 16;
+            // 
+            // btnExportToDB
+            // 
+            this.btnExportToDB.Location = new System.Drawing.Point(963, 19);
+            this.btnExportToDB.Name = "btnExportToDB";
+            this.btnExportToDB.Size = new System.Drawing.Size(75, 42);
+            this.btnExportToDB.TabIndex = 17;
+            this.btnExportToDB.Text = "ExportToDB";
+            this.btnExportToDB.UseVisualStyleBackColor = true;
+            this.btnExportToDB.Click += new System.EventHandler(this.btnExportToDB_Click);
+            // 
+            // btnExportAllToDB
+            // 
+            this.btnExportAllToDB.Location = new System.Drawing.Point(521, 107);
+            this.btnExportAllToDB.Name = "btnExportAllToDB";
+            this.btnExportAllToDB.Size = new System.Drawing.Size(120, 21);
+            this.btnExportAllToDB.TabIndex = 18;
+            this.btnExportAllToDB.Text = "ExportAllToDB";
+            this.btnExportAllToDB.UseVisualStyleBackColor = true;
+            this.btnExportAllToDB.Click += new System.EventHandler(this.btnExportAllToDB_Click);
+            // 
+            // lbLogTable
+            // 
+            this.lbLogTable.FormattingEnabled = true;
+            this.lbLogTable.ItemHeight = 12;
+            this.lbLogTable.Items.AddRange(new object[] {
+            "NLog",
+            "NlogConfirm"});
+            this.lbLogTable.Location = new System.Drawing.Point(521, 50);
+            this.lbLogTable.Name = "lbLogTable";
+            this.lbLogTable.Size = new System.Drawing.Size(120, 40);
+            this.lbLogTable.TabIndex = 19;
             // 
             // Nlog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 605);
+            this.Controls.Add(this.lbLogTable);
+            this.Controls.Add(this.btnExportAllToDB);
+            this.Controls.Add(this.btnExportToDB);
             this.Controls.Add(this.lbItemText);
             this.Controls.Add(this.lbController);
             this.Controls.Add(this.btnExportView);
@@ -187,6 +225,9 @@
         private System.Windows.Forms.Button btnExportView;
         private System.Windows.Forms.ListBox lbController;
         private System.Windows.Forms.ListBox lbItemText;
+        private System.Windows.Forms.Button btnExportToDB;
+        private System.Windows.Forms.Button btnExportAllToDB;
+        private System.Windows.Forms.ListBox lbLogTable;
     }
 }
 

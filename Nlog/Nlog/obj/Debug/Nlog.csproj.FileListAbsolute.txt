@@ -7,3 +7,4 @@ Z:\git\Nlog\Nlog\Nlog\obj\Debug\Nlog.Properties.Resources.resources
 Z:\git\Nlog\Nlog\Nlog\obj\Debug\Nlog.csproj.GenerateResource.Cache
 Z:\git\Nlog\Nlog\Nlog\obj\Debug\Nlog.exe
 Z:\git\Nlog\Nlog\Nlog\obj\Debug\Nlog.pdb
+D:\git\Nlog\Nlog\Nlog\bin\Debug\Nlog.exe

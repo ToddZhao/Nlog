@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -22,14 +23,28 @@ namespace Nlog
             txtFolder.Text = ConfigurationManager.AppSettings["Path"];
         }
 
+        /// <summary>
+        /// load file of the log
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbxFileList_Enter(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtFolder.Text.Trim()))
+            if (!string.IsNullOrEmpty(txtFolder.Text.Trim()) && System.IO.Directory.Exists(txtFolder.Text.Trim()))
             {
                 cbxFileList.DataSource = Directory.GetFiles(txtFolder.Text.Trim(), "*.log", SearchOption.AllDirectories);
             }
+            else
+            {
+                MessageBox.Show(string.Format("請添加目錄：{0}", txtFolder.Text.Trim()));
+            }
         }
 
+        /// <summary>
+        /// bind data of the DataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
             var nlogFile = cbxFileList.SelectedValue.ToString();
@@ -77,6 +92,11 @@ namespace Nlog
             dgvList.DataSource = table;
         }
 
+        /// <summary>
+        /// query by the condition of the combox
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
         private bool Filter(string[] arr)
         {
             bool flag = false;
@@ -106,6 +126,11 @@ namespace Nlog
             return flag;
         }
 
+        /// <summary>
+        /// add some data of the combox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnStuff_Click(object sender, EventArgs e)
         {
             //file path
@@ -150,6 +175,11 @@ namespace Nlog
             //TODO
         }
 
+        /// <summary>
+        /// export the data to one file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExport_Click(object sender, EventArgs e)
         {
             var nlogFile = cbxFileList.SelectedValue.ToString();
@@ -182,6 +212,11 @@ namespace Nlog
             }
         }
 
+        /// <summary>
+        /// export the data to one file with view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExportView_Click(object sender, EventArgs e)
         {
             try
@@ -231,16 +266,94 @@ namespace Nlog
 
                 // save the application
                 workbook.SaveAs(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-                //workbook.Save();
                 // Exit from the application
                 app.Quit();
                 MessageBox.Show("ExportView Success！");
 
             }
-            catch {
+            catch
+            {
                 MessageBox.Show("ExportView Failure ！");
             }
 
+        }
+
+        private void btnExportToDB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlBulkCopy sqlbulkcopy = new SqlBulkCopy(NLogHelper.ConnString, SqlBulkCopyOptions.UseInternalTransaction);
+                NLogHelper.LogTable = lbLogTable.SelectedValue.ToString().Trim();
+                sqlbulkcopy.DestinationTableName = NLogHelper.LogTable;//数据库中的表名
+                DataTable dt = dgvList.DataSource as DataTable;
+                sqlbulkcopy.WriteToServer(dt);
+                MessageBox.Show("ExportToDB Success ");
+            }
+            catch
+            {
+                MessageBox.Show("ExportToDB Failure ");
+            }
+        }
+
+        private void btnExportAllToDB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var i = 0;
+                foreach (var item in cbxFileList.Items)
+                {
+                    var nlogFile = item.ToString();
+                    var firstIndex = nlogFile.LastIndexOf("\\");
+                    var lastIndex = nlogFile.LastIndexOf(".");
+                    var date = nlogFile.Substring(firstIndex + 1, lastIndex - firstIndex - 1);
+                    var table = NLogHelper.Table;
+                    var columns = NLogHelper.Columns.Split(',');
+                    if (!File.Exists(nlogFile))
+                        return;
+                    #region Init Table
+                    using (var sr = new StreamReader(nlogFile))
+                    {
+                        string line = null;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            var splitChar = NLogHelper.SplitChar.ToCharArray();
+                            var arr = line.Split(splitChar);
+
+                            var flag = this.Filter(arr);
+                            if (!flag) continue;
+
+                            var row = table.NewRow();
+                            i++;
+                            row[columns[0]] = i;
+                            row[columns[1]] = string.Format("{0} {1}", date, arr[0]);
+                            if (arr.Length > 1 && !string.IsNullOrEmpty(arr[1]))
+                            {
+                                row[columns[2]] = arr[1];
+                            }
+                            if (arr.Length > 2 && !string.IsNullOrEmpty(arr[2]))
+                            {
+                                var firstColon = arr[2].IndexOf(':');
+                                row[columns[3]] = arr[2].Substring(firstColon + 1, arr[2].Length - firstColon - 1);
+                            }
+                            if (arr.Length > 3 && !string.IsNullOrEmpty(arr[3]))
+                            {
+                                row[columns[4]] = arr[3];
+                            }
+                            table.Rows.Add(row);
+                        }
+                    }
+                    #endregion
+                    SqlBulkCopy sqlbulkcopy = new SqlBulkCopy(NLogHelper.ConnString, SqlBulkCopyOptions.UseInternalTransaction);
+                    NLogHelper.LogTable = lbLogTable.SelectedValue.ToString().Trim();
+                    sqlbulkcopy.DestinationTableName = NLogHelper.LogTable;//数据库中的表名
+                    sqlbulkcopy.WriteToServer(table);
+                }
+                MessageBox.Show("ExportAllToDB Success ");
+            }
+            catch
+            {
+                MessageBox.Show("ExportAllToDB Failure ");
+            }
         }
 
     }
