@@ -77,7 +77,7 @@ namespace Nlog
                     }
                     if (arr.Length > 2 && !string.IsNullOrEmpty(arr[2]))
                     {
-                        var firstColon = arr[2].IndexOf(':');
+                        var firstColon = arr[2].IndexOf('：');
                         row[columns[3]] = arr[2].Substring(firstColon + 1, arr[2].Length - firstColon - 1);
                     }
                     if (arr.Length > 3 && !string.IsNullOrEmpty(arr[3]))
@@ -283,7 +283,6 @@ namespace Nlog
             try
             {
                 SqlBulkCopy sqlbulkcopy = new SqlBulkCopy(NLogHelper.ConnString, SqlBulkCopyOptions.UseInternalTransaction);
-                NLogHelper.LogTable = lbLogTable.SelectedValue.ToString().Trim();
                 sqlbulkcopy.DestinationTableName = NLogHelper.LogTable;//数据库中的表名
                 DataTable dt = dgvList.DataSource as DataTable;
                 sqlbulkcopy.WriteToServer(dt);
@@ -332,7 +331,7 @@ namespace Nlog
                             }
                             if (arr.Length > 2 && !string.IsNullOrEmpty(arr[2]))
                             {
-                                var firstColon = arr[2].IndexOf(':');
+                                var firstColon = arr[2].IndexOf('：');
                                 row[columns[3]] = arr[2].Substring(firstColon + 1, arr[2].Length - firstColon - 1);
                             }
                             if (arr.Length > 3 && !string.IsNullOrEmpty(arr[3]))
@@ -344,7 +343,6 @@ namespace Nlog
                     }
                     #endregion
                     SqlBulkCopy sqlbulkcopy = new SqlBulkCopy(NLogHelper.ConnString, SqlBulkCopyOptions.UseInternalTransaction);
-                    NLogHelper.LogTable = lbLogTable.SelectedValue.ToString().Trim();
                     sqlbulkcopy.DestinationTableName = NLogHelper.LogTable;//数据库中的表名
                     sqlbulkcopy.WriteToServer(table);
                 }

@@ -13,7 +13,7 @@ namespace Nlog
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Nlog());
+            Application.Run(new Main());
         }
     }
 }

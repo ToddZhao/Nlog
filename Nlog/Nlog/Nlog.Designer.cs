@@ -41,7 +41,6 @@
             this.lbItemText = new System.Windows.Forms.ListBox();
             this.btnExportToDB = new System.Windows.Forms.Button();
             this.btnExportAllToDB = new System.Windows.Forms.Button();
-            this.lbLogTable = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -164,7 +163,7 @@
             // 
             // btnExportAllToDB
             // 
-            this.btnExportAllToDB.Location = new System.Drawing.Point(521, 107);
+            this.btnExportAllToDB.Location = new System.Drawing.Point(521, 41);
             this.btnExportAllToDB.Name = "btnExportAllToDB";
             this.btnExportAllToDB.Size = new System.Drawing.Size(120, 21);
             this.btnExportAllToDB.TabIndex = 18;
@@ -172,24 +171,11 @@
             this.btnExportAllToDB.UseVisualStyleBackColor = true;
             this.btnExportAllToDB.Click += new System.EventHandler(this.btnExportAllToDB_Click);
             // 
-            // lbLogTable
-            // 
-            this.lbLogTable.FormattingEnabled = true;
-            this.lbLogTable.ItemHeight = 12;
-            this.lbLogTable.Items.AddRange(new object[] {
-            "NLog",
-            "NlogConfirm"});
-            this.lbLogTable.Location = new System.Drawing.Point(521, 50);
-            this.lbLogTable.Name = "lbLogTable";
-            this.lbLogTable.Size = new System.Drawing.Size(120, 40);
-            this.lbLogTable.TabIndex = 19;
-            // 
             // Nlog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1296, 605);
-            this.Controls.Add(this.lbLogTable);
             this.Controls.Add(this.btnExportAllToDB);
             this.Controls.Add(this.btnExportToDB);
             this.Controls.Add(this.lbItemText);
@@ -227,7 +213,6 @@
         private System.Windows.Forms.ListBox lbItemText;
         private System.Windows.Forms.Button btnExportToDB;
         private System.Windows.Forms.Button btnExportAllToDB;
-        private System.Windows.Forms.ListBox lbLogTable;
     }
 }
 
