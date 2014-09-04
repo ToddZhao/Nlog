@@ -73,12 +73,36 @@ namespace Nlog
                     row[columns[1]] = string.Format("{0} {1}", date, arr[0]);
                     if (arr.Length > 1 && !string.IsNullOrEmpty(arr[1]))
                     {
-                        row[columns[2]] = arr[1];
+                        if (arr[1].Contains("L仔(散票)可用机票"))
+                        {
+                            row[columns[2]] = "L仔(散票)可用机票";
+                        }
+                        else if (arr[1].Contains("酒店必選項"))
+                        {
+                            row[columns[2]] = "L仔(散票)可用机票";
+                        }
+                        else if (arr[1].Contains("查Routes"))
+                        {
+                            row[columns[2]] = "查Routes";
+                        }
+                        else
+                        {
+                            row[columns[2]] = arr[1].Trim();
+                        }
                     }
                     if (arr.Length > 2 && !string.IsNullOrEmpty(arr[2]))
                     {
-                        var firstColon = arr[2].IndexOf('：');
-                        row[columns[3]] = arr[2].Substring(firstColon + 1, arr[2].Length - firstColon - 1);
+                        if (arr[1].Contains("BookingHelper GetProductInfos！"))
+                        {
+                            var firstColon = arr[2].IndexOf('：');
+                            var firstIndexOfSpace = arr[2].IndexOf(' ');
+                            row[columns[3]] = arr[2].Substring(firstColon + 1, firstIndexOfSpace - (firstColon + 1));
+                        }
+                        else
+                        {
+                            var firstColon = arr[2].IndexOf('：');
+                            row[columns[3]] = arr[2].Substring(firstColon + 1, arr[2].Length - firstColon - 1);
+                        }
                     }
                     if (arr.Length > 3 && !string.IsNullOrEmpty(arr[3]))
                     {
@@ -152,7 +176,7 @@ namespace Nlog
                     var arr = line.Split('-', '！');
                     if (arr.Length > 2 && !string.IsNullOrEmpty(arr[1]))
                     {
-                        items.Add(arr[1]);
+                        items.Add(arr[1].Contains("[查Routes:") ? "查Routes" : arr[1]);
                     }
                 }
             }

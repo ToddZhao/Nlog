@@ -49,54 +49,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NLog.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NLog.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="NLog.cs">
-      <DependentUpon>NLog.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NLog.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NLog.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="NLog1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NLog.tt</DependentUpon>
+      <DependentUpon>NlogDB.tt</DependentUpon>
     </Compile>
     <Compile Include="NLogConfirm.cs">
-      <DependentUpon>NLog.tt</DependentUpon>
+      <DependentUpon>NlogDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NlogDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NlogDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NlogDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NlogDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NlogDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NlogDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="NLog.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NLog.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="NLog.Context.tt">
+    <EntityDeploy Include="NlogDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NlogDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="NlogDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NLog.edmx</DependentUpon>
-      <LastGenOutput>NLog.Context.cs</LastGenOutput>
+      <DependentUpon>NlogDB.edmx</DependentUpon>
+      <LastGenOutput>NlogDB.Context.cs</LastGenOutput>
     </None>
-    <None Include="NLog.edmx.diagram">
-      <DependentUpon>NLog.edmx</DependentUpon>
+    <None Include="NlogDB.edmx.diagram">
+      <DependentUpon>NlogDB.edmx</DependentUpon>
     </None>
-    <None Include="NLog.tt">
+    <None Include="NlogDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NLog.edmx</DependentUpon>
-      <LastGenOutput>NLog1.cs</LastGenOutput>
+      <DependentUpon>NlogDB.edmx</DependentUpon>
+      <LastGenOutput>NlogDB.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NlogDB.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
